@@ -6,4 +6,4 @@ services:
     image: python:3-jessie
     volumes:
       - ./:/code
-    command: python /code/census.py
+    command: python /code/minimal.py
