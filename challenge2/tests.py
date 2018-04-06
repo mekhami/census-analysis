@@ -21,6 +21,7 @@ class CensusTests(unittest.TestCase):
         self.assertEqual(census.headers[2], '7_2009')
 
     def test_rows(self):
+        # I've put a list of valid state names in a JSON file
         with open(os.path.join(cwd, 'state_names.json'), 'r') as f:
             state_names = json.load(f)
 
@@ -33,6 +34,7 @@ class CensusTests(unittest.TestCase):
 
             # Theres a huge range of town names, but all of them are something
             self.assertIsNotNone(row.town)
+            self.assertIsInstance(row.town, str)
 
         with open(data_file, 'r') as f:
             num_lines = sum([1 for line in f])

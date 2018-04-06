@@ -1,17 +1,42 @@
 import os
+from typing import Generator, List
 from time import perf_counter
 
 # This establishes a Type alias, so our annotations can be clearer
 Filepath = str
 
+class CensusRow():
+    def __init__(self, state: str, town: str, population: int):
+        """
+        Initialize a CensusRow object
+
+        Keyword Arguments:
+        state -- The name of the state
+        town -- The name of the town
+        population -- The number of people who live in the town
+        """
+        self.state = state
+        self.town = town
+        self.population = population
+
+
 class Census():
     def __init__(self, data: Filepath):
+        """
+        Initialize a Census object
+
+        Keyword Arguments:
+        data -- A String representation of a full file path pointing to a census data file
+        """
         self.data = data
 
         with open(self.data, 'r') as f:
             self.headers = f.readline().split()
 
-    def rows(self):
+    def rows(self) -> Generator[CensusRow, None, None]:
+        """
+        Yields each row of the Census Data File as a CensusRow object
+        """
         with open(self.data, 'r') as f:
             # The first line is headers, so disregard that one
             f.readline()
@@ -56,14 +81,7 @@ class Census():
                 yield CensusRow(state, town, int(population))
 
 
-class CensusRow():
-    def __init__(self, state: str, town: str, population: int):
-        self.state = state
-        self.town = town
-        self.population = population
-
-
-def benford_frequencies(census: Census) -> list:
+def benford_frequencies(census: Census) -> List[int]:
     # Initialize a list with 0 values for each of the 9 possible digits
     digit_frequency = [0 for _ in range(9)]
 
