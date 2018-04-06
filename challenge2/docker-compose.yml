@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  lab7-python:
+    container_name: lab7-python
+    image: python:3-jessie
+    volumes:
+      - ./:/code
+    command: python /code/census.py
