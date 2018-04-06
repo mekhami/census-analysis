@@ -21,7 +21,7 @@ class Census():
 
                 if len(split_line) == 3:
                     # For the most part, our rows are whitespace delimited in 3 easy columns
-                    state, city, population = split_line
+                    state, town, population = split_line
                 else:
                     # However, some city names have more than one word, which means we need to split a 
                     # little differently
@@ -33,33 +33,33 @@ class Census():
                     state = split_line[0]
 
                     # The city name starts right after the state name ends
-                    city_index = 1
+                    town_index = 1
 
                     # We have some 2 word state names, so we need to check for those
-                    new_state_names = ['Hampshire', 'York', 'Jersey', 'Mexico']
+                    new_state_names = ['Hamp', 'York', 'Jersey', 'Mexico']
 
                     new_state = state == 'New' and split_line[1] in new_state_names
-                    dakotas_and_carolinas = state in ['North', 'South'] and split_line[1] in ['Dakota', 'Carolina']
-                    west_virginia = state == 'West' and split_line[1] == 'Virginia'
-                    rhode_island = state == 'Rhode' and split_line[1] == 'Island'
+                    dakotas_and_carolinas = state in ['N', 'S'] and split_line[1] in ['Dakota', 'Carolina']
+                    west_virginia = state == 'W' and split_line[1] == 'Virginia'
+                    rhode_island = state == 'Rhode' and split_line[1] == 'Is'
 
                     if any([new_state, dakotas_and_carolinas, west_virginia, rhode_island]):
                         # In these cases, we want state to be a combination of the first two words
                         state = ' '.join(split_line[:2])
 
                         # And we also want to start building the city name one word later
-                        city_index = 2
+                        town_index = 2
 
                     # City will be the remainder of the words in the middle
-                    city = ' '.join(split_line[city_index:-1])
+                    town = ' '.join(split_line[town_index:-1])
                 
-                yield CensusRow(state, city, int(population))
+                yield CensusRow(state, town, int(population))
 
 
 class CensusRow():
-    def __init__(self, state: str, city: str, population: int):
+    def __init__(self, state: str, town: str, population: int):
         self.state = state
-        self.city = city
+        self.town = town
         self.population = population
 
 
