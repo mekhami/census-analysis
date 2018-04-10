@@ -1,5 +1,5 @@
 import unittest
-import census
+from census import Census, CensusRow
 import os
 import json
 
@@ -8,7 +8,7 @@ cwd = os.path.dirname(__file__)
 data_file = os.path.join(cwd, 'census_2009')
 
 # Initialize the Census object to be tested
-census = census.Census(data_file)
+census = Census(data_file)
 
 class CensusTests(unittest.TestCase):
     def test_headers(self):
@@ -26,15 +26,19 @@ class CensusTests(unittest.TestCase):
             state_names = json.load(f)
 
         for i, row in enumerate(census.rows()):
+            # The row should have been yielded as a CensusRow Object
+            self.assertIsInstance(row, CensusRow)
+
             # The state should be a valid state name from the data file
             self.assertIn(row.state, state_names)
 
             # The population should be a number
             self.assertIsInstance(row.population, int)
 
-            # Theres a huge range of town names, but all of them are something
+            # Theres a huge range of town names, but all of them are non-empty strings
             self.assertIsNotNone(row.town)
             self.assertIsInstance(row.town, str)
+            self.assertGreater(len(row.town), 0)
 
         with open(data_file, 'r') as f:
             num_lines = sum([1 for line in f])

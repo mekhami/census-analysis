@@ -37,45 +37,45 @@ Digit Count %
 The solution is pure python with no dependencies, so if you have python3 installed on your system, you can run this like so (I have python 3.6.2 aliased as python3 on my machine, but please use the appropriate command for your system):
 
 ```shell
-# from within challenge2 directory
+# from within project directory
 python3 census.py
 ```
 
 To eliminate discrepencies between python versions, I have also included a docker-compose file so that you can run the application in [docker](https://www.docker.com/community-edition):
 
 ```shell
-# from within challenge2 directory
+# from within project directory
 docker-compose up
 ```
 
 And then once completed:
 
 ```shell
-# from within challenge2 directory
+# from within project directory
 docker-compose down
 ```
 
 ## Alternative Solutions
-I also wrote a minimalist solution that forgoes classes, and it is about twice as fast as my primary solution.
+I also wrote a minimalist solution that forgoes classes, and it is more than twice as fast as my primary solution.
 
 To use your system's python3:
 
 ```shell
-# from within challenge2 directory
+# from within project directory
 python3 minimal.py
 ```
 
 To use [docker](https://www.docker.com/community-edition):
 
 ```shell
-# from within challenge2 directory
+# from within project directory
 docker-compose -f minimal.yml up
 ```
 
 And then once completed:
 
 ```shell
-# from within challenge2 directory
+# from within project directory
 docker-compose -f minimal.yml down
 ```
 
@@ -85,20 +85,20 @@ I used python's built-in `unittest` to write a couple test cases for my `Census`
 To run tests using your system's python3:
 
 ```shell
-# from within challenge2 directory
+# from within project directory
 python3 tests.py -v
 ```
 
 To use [docker](https://www.docker.com/community-edition):
 
 ```shell
-# from within challenge2 directory
+# from within project directory
 docker-compose -f tests.yml up
 ```
 
 And then once completed:
 
 ```shell
-# from within challenge2 directory
+# from within project directory
 docker-compose -f tests.yml down
 ```
