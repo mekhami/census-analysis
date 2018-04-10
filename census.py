@@ -29,7 +29,6 @@ class Census():
     data -- A String representation of a full file path pointing to a census data file
     """
     def __init__(self, data: Filepath):
-        
         self.data = data
 
         with open(self.data, 'r') as f:
@@ -118,13 +117,11 @@ if __name__ == '__main__':
     # Print out the table headers
     print('\n{:<8s}{:<8s}{:<8s}'.format('Digit', 'Count', '%'))
 
-    # Establish formatted columns for the values
-    column_format = '{:<8}{:<8}{:0.1f}'
-
+    # Print out the frequencies 
     for digit in range(1, 10):
         count = digit_frequency[digit]
         percent = (count / total) * 100
-        print(column_format.format(digit, count, percent))
+        print('{:<8}{:<8}{:0.1f}'.format(digit, count, percent))
 
     end = perf_counter()
 

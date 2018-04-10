@@ -22,7 +22,7 @@ total = sum(frequencies)
 # Print out the table headers
 print('\n{:<8s}{:<8s}{:<8s}'.format('Digit', 'Count', '%'))
 
-# Print out the rest of the data
+# Print out the frequencies
 for digit, count in enumerate(frequencies):
     print('{:<8}{:<8}{:0.1f}'.format(digit + 1, count, (count / total) * 100))
 

@@ -41,7 +41,7 @@ The solution is pure python with no dependencies, so if you have python3 install
 python3 census.py
 ```
 
-To eliminate discrepencies between python versions, I have also included a docker-compose file so that you can run the application in docker:
+To eliminate discrepencies between python versions, I have also included a docker-compose file so that you can run the application in [docker](https://www.docker.com/community-edition):
 
 ```shell
 # from within challenge2 directory
@@ -65,7 +65,7 @@ To use your system's python3:
 python3 minimal.py
 ```
 
-To use docker:
+To use [docker](https://www.docker.com/community-edition):
 
 ```shell
 # from within challenge2 directory
@@ -89,7 +89,7 @@ To run tests using your system's python3:
 python3 tests.py -v
 ```
 
-To use docker:
+To use [docker](https://www.docker.com/community-edition):
 
 ```shell
 # from within challenge2 directory
