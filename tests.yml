@@ -3,7 +3,7 @@ version: '3'
 services:
   lab7-python:
     container_name: lab7-python
-    image: python:3-jessie
+    image: python:3.6-jessie
     volumes:
       - ./:/code
     command: python /code/tests.py -v

@@ -1,4 +1,4 @@
-# Lab7 Coding Challenge 2 - Benford's Law and US Census Data
+# Benford's Law and US Census Data
 
 ## Overview
 In 1881, Simon Newcomb had noticed that in tables of logarithms, the first pages were much more worn and
@@ -34,7 +34,7 @@ Digit Count %
 ```
 
 ## Running the Solution
-The solution is pure python with no dependencies, so if you have python3 installed on your system, you can run this like so:
+The solution is pure python with no dependencies, so if you have python3 installed on your system, you can run this like so (I have python 3.6.2 aliased as python3 on my machine, but please use the appropriate command for your system):
 
 ```shell
 # from within challenge2 directory

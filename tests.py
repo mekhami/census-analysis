@@ -43,6 +43,19 @@ class CensusTests(unittest.TestCase):
         # num_lines-1 is how many there should be, because we disregard the headers
         self.assertEqual(i+1, num_lines-1)
 
+    def test_benford_frequencies(self):
+        frequencies = census.benford_frequencies()
+
+        # We should have recieved a list 10 items long
+        self.assertEqual(len(frequencies), 10)
+
+        # The first item will be 0, because the census data file is not 0-padded
+        self.assertEqual(frequencies[0], 0)
+
+        # Every item in the list should be an integer
+        for i in range(10):
+            self.assertIsInstance(frequencies[i], int)
+
 
 if __name__ == '__main__':
     unittest.main()

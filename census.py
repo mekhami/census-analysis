@@ -6,28 +6,30 @@ from time import perf_counter
 Filepath = str
 
 class CensusRow():
-    def __init__(self, state: str, town: str, population: int):
-        """
-        Initialize a CensusRow object
+    """
+    A CensusRow object is yielded by Census.rows()
 
-        Keyword Arguments:
-        state -- The name of the state
-        town -- The name of the town
-        population -- The number of people who live in the town
-        """
+    Keyword Arguments:
+    state -- The name of the state
+    town -- The name of the town
+    population -- The number of people who live in the town
+    """
+    def __init__(self, state: str, town: str, population: int):   
         self.state = state
         self.town = town
         self.population = population
 
 
 class Census():
-    def __init__(self, data: Filepath):
-        """
-        Initialize a Census object
+    """
+    The Census Object allows efficient analysis of a census data file.
+    The file should be a whitespace-separated table of values such as a .tsv
 
-        Keyword Arguments:
-        data -- A String representation of a full file path pointing to a census data file
-        """
+    Keyword Arguments:
+    data -- A String representation of a full file path pointing to a census data file
+    """
+    def __init__(self, data: Filepath):
+        
         self.data = data
 
         with open(self.data, 'r') as f:
@@ -80,16 +82,22 @@ class Census():
                 
                 yield CensusRow(state, town, int(population))
 
+    def benford_frequencies(self) -> List[int]:
+        """
+        Returns a List indexed 0-9, indicating the number of occurrences of each digit
+        as the first digit of a listed population number.
 
-def benford_frequencies(census: Census) -> List[int]:
-    # Initialize a list with 0 values for each of the 9 possible digits
-    digit_frequency = [0 for _ in range(9)]
+        Technically, the List could be returned indexed 0-8, but since it's function is to
+        lookup the frequency of a digit, I thought it best to pad the start of the list and
+        then use it as 1-indexed instead of 0-indexed.
+        """
+        digit_frequency = [0 for _ in range(10)]
 
-    for row in census.rows():
-        first_digit = int(str(row.population)[0])
-        digit_frequency[first_digit - 1] += 1
+        for row in self.rows():
+            first_digit = int(str(row.population)[0])
+            digit_frequency[first_digit] += 1
 
-    return digit_frequency
+        return digit_frequency
 
 
 if __name__ == '__main__':
@@ -102,7 +110,7 @@ if __name__ == '__main__':
     census = Census(data_file)
 
     # Calculate the frequency of occurrence for the first digit of population numbers
-    digit_frequency = benford_frequencies(census)
+    digit_frequency = census.benford_frequencies()
 
     # Since we also need a percentage, we will need the total number of occurrences
     total = sum(digit_frequency)
@@ -113,9 +121,10 @@ if __name__ == '__main__':
     # Establish formatted columns for the values
     column_format = '{:<8}{:<8}{:0.1f}'
 
-    for digit, count in enumerate(digit_frequency):
+    for digit in range(1, 10):
+        count = digit_frequency[digit]
         percent = (count / total) * 100
-        print(column_format.format(digit + 1, count, percent))
+        print(column_format.format(digit, count, percent))
 
     end = perf_counter()
 
