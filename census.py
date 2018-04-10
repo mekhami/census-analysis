@@ -86,7 +86,7 @@ class Census():
         Returns a List indexed 0-9, indicating the number of occurrences of each digit
         as the first digit of a listed population number.
 
-        Technically, the List could be returned indexed 0-8, but since it's function is to
+        Technically, the List could be returned indexed 0-8, but since its function is to
         lookup the frequency of a digit, I thought it best to pad the start of the list and
         then use it as 1-indexed instead of 0-indexed.
         """
